@@ -24,7 +24,7 @@
                     <button id="even_odd_button" type="button" class="toggle_btn btn btn-secondary border border-2 border-white rounded-3" onclick="go_to_game(2)">Pari / Dispari ?</button>
                 </div>
                 <div class="col-1 offset-5">
-                    <button id="quit_button" type="button" class="btn btn-light border border-2 border-warning rounded-3" onclick="window.close()">Abbandona</button>
+                    <button id="quit_button" type="button" class="toggle_btn btn btn-light border border-2 border-warning rounded-3" onclick="window.close()">Abbandona</button>
                 </div>
             </div>
         </nav>
@@ -35,10 +35,10 @@
                 <h3 id="palindrome_title" class="text-center pt-1 pb-2">PALINDROMA</h3>
                 <div class="col-6 offset-1">
                     <label for="your_word" class="form-label mb-0">La tua parola:</label>
-                    <input id="your_word" type="text" class="form-control" minlength="1" maxlength="30" required>
+                    <input id="your_word" type="text" class="toggle_btn form-control" minlength="2" maxlength="30" required>
                 </div>     
                 <div class="col-2 mt-4">
-                    <button id="palindrome_submit" class="btn btn-danger" type="submit">Procedi</button>
+                    <button id="palindrome_submit" class="toggle_btn btn btn-danger" type="submit">Procedi</button>
                 </div>          
             </form>
             <form id="even_odd_game" class="row d-none align-items-center">
@@ -69,7 +69,7 @@
                 <span id="even_odd_result" class="d-none col-6">Il numero scelto dalla CPU è:<span id="cpu_nr" class="ms-3 text-success fs-5 fw-bold"></span></span>
                 <span id="even_odd_result_msg" class="d-none col-4 offset-2 fs-5 fw-bold"></span>
                 <span id="palindrome_result" class="d-none col-6">Esito del controllo:</span>
-                <span id="palindrome_result_msg" class="d-none col-4 offset-2 fs-5 fw-bold">Palindroma</span>
+                <span id="palindrome_result_msg" class="d-none col-4 offset-2 fs-5 fw-bold"></span>
             </div>
             <div id="game_buttons" class="d-none row justify-content-between border-top border-danger px-3 py-4 mx-3 mt-3">
                 <div class="col-3 offset-1">

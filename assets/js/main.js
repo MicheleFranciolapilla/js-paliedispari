@@ -32,7 +32,8 @@ function toggle_none(id_what)
 
 function play_palindrome()
 {
-
+    document.getElementById('even_odd_title').innerText = "PALINDROMA";
+    toggle_none('palindrome_game');
 }
 
 function play_even_odd()
@@ -49,7 +50,6 @@ function go_to_game(game)
     switch (game)
     {
         case 1:
-            toggle_none('palindrome_game');
             play_palindrome();
             break;
         case 2:
@@ -68,6 +68,21 @@ function is_even(number)
     {
         return false;
     }
+}
+
+function is_palindrome(word)
+{
+    const   word_length     = word.length;
+    const   last_char       = Math.floor(word_length / 2) - 1;
+    console.log(word, word_length, last_char);
+    for (let i=0; i <= last_char; i++)
+    {
+        if (!(word[i] == word[word_length - 1 - i]))
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 function random_int(max)
@@ -121,5 +136,22 @@ even_odd_game.addEventListener("submit", (even_odd_call_back) =>
     toggle_none('game_buttons');
     console.log(even, odd, number);
     console.log(cpu_nr, result, even_odd, you_win);
+});
 
+palindrome_game.addEventListener("submit", (palindrome_call_back) => 
+{
+    palindrome_call_back.preventDefault();
+    const   word    = document.getElementById('your_word').value.toUpperCase();
+    const   result  = is_palindrome(word);
+    let     msg     = "Non palindroma"; 
+    if (result)
+    {
+        msg = "Palindroma";
+    }
+    toggle_on_off('#palindrome_game', disable_btn);
+    toggle_none('game_result');
+    toggle_none('palindrome_result');
+    document.getElementById('palindrome_result_msg').innerText = msg;
+    toggle_none('palindrome_result_msg');
+    toggle_none('game_buttons');
 });
