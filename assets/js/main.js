@@ -14,10 +14,9 @@
 const       disable_btn     = true;
 const       enable_btn      = false;
 
-
 function toggle_on_off(where, btn_status)
 {
-    let     elements    = document.querySelectorAll(where + " .toggle_btn");
+    let     elements    = document.querySelectorAll(where + ' .toggle_btn');
     for (let i = 0; i < elements.length; i++)
     {
         elements[i].disabled = btn_status;
@@ -27,7 +26,7 @@ function toggle_on_off(where, btn_status)
 function toggle_none(id_what)
 {
     let element = document.getElementById(id_what);
-    element.classList.toggle("d-none");
+    element.classList.toggle('d-none');
 }
 
 function play_palindrome()
@@ -37,22 +36,58 @@ function play_palindrome()
 
 function play_even_odd()
 {
-    
+
 }
 
 function go_to_game(game)
 {
-    toggle_on_off("#btn_nav", disable_btn);   
-    toggle_none("games_box");
+    toggle_on_off('#btn_nav', disable_btn);   
+    toggle_none('games_box');
     switch (game)
     {
         case 1:
-            toggle_none("palindrome_game");
+            toggle_none('palindrome_game');
             play_palindrome();
             break;
         case 2:
-            toggle_none("even_odd_game");
+            toggle_none('even_odd_game');
             play_even_odd();
             break;
     }
 }
+
+function is_even(number)
+{
+    if (number % 2 == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+function random_int(max)
+{
+    return Math.floor(Math.random() * max);
+}
+
+even_odd_game.addEventListener("submit", (even_odd_call_back) => 
+{
+    even_odd_call_back.preventDefault();
+    const   even        = document.getElementById('bet_even').checked;
+    const   odd         = document.getElementById('bet_odd').checked;
+    const   number      = parseInt(document.getElementById('user_nr').value);
+    const   cpu_nr      = random_int(5) + 1;
+    const   result      = number + cpu_nr;
+    const   even_odd    = is_even(result);
+    let     you_win     = false;
+    if ((even_odd && even) || (!even_odd && odd))
+    {
+        you_win = true;
+    }
+    console.log(even, odd, number);
+    console.log(cpu_nr, result, even_odd, you_win);
+
+});
