@@ -13,6 +13,7 @@
 
 const       disable_btn     = true;
 const       enable_btn      = false;
+let         last_game       = 0; 
 
 function toggle_on_off(where, btn_status)
 {
@@ -36,11 +37,13 @@ function play_palindrome()
 
 function play_even_odd()
 {
-
+    document.getElementById('even_odd_title').innerText = "PARI o DISPARI";
+    toggle_none('even_odd_game');
 }
 
 function go_to_game(game)
 {
+    last_game = game;
     toggle_on_off('#btn_nav', disable_btn);   
     toggle_none('games_box');
     switch (game)
@@ -50,7 +53,6 @@ function go_to_game(game)
             play_palindrome();
             break;
         case 2:
-            toggle_none('even_odd_game');
             play_even_odd();
             break;
     }
@@ -73,6 +75,26 @@ function random_int(max)
     return Math.floor(Math.random() * max);
 }
 
+function game_again()
+{
+    switch (last_game)
+    {
+        case 2:
+            toggle_none('game_buttons');
+            toggle_none('even_odd_result');
+            toggle_none('even_odd_result_msg');
+            toggle_none('game_result');
+            toggle_on_off('#even_odd_game', enable_btn);
+    }
+}
+
+function game_back()
+{
+    game_again();
+    toggle_none('games_box');
+    toggle_on_off('#btn_nav', enable_btn);   
+}
+
 even_odd_game.addEventListener("submit", (even_odd_call_back) => 
 {
     even_odd_call_back.preventDefault();
@@ -83,10 +105,20 @@ even_odd_game.addEventListener("submit", (even_odd_call_back) =>
     const   result      = number + cpu_nr;
     const   even_odd    = is_even(result);
     let     you_win     = false;
+    let     you_win_msg = "Ha vinto la CPU";
+
     if ((even_odd && even) || (!even_odd && odd))
     {
         you_win = true;
+        you_win_msg = "Hai vinto tu";
     }
+    toggle_on_off('#even_odd_game', disable_btn);
+    toggle_none('game_result');
+    document.getElementById('cpu_nr').innerText = cpu_nr;
+    document.getElementById('even_odd_result_msg').innerText = you_win_msg;
+    toggle_none('even_odd_result');
+    toggle_none('even_odd_result_msg');
+    toggle_none('game_buttons');
     console.log(even, odd, number);
     console.log(cpu_nr, result, even_odd, you_win);
 
