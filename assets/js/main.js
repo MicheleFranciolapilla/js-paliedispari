@@ -15,6 +15,14 @@ const       disable_btn     = true;
 const       enable_btn      = false;
 let         last_game       = 0; 
 
+function reset_data()
+{
+    document.getElementById('your_word').value = "Osso";
+    document.getElementById('bet_even').checked = "false";
+    document.getElementById('bet_odd').checked = "true";
+    document.getElementById('user_nr').value = "1";
+}
+
 function toggle_on_off(where, btn_status)
 {
     let     elements    = document.querySelectorAll(where + ' .toggle_btn');
@@ -114,6 +122,7 @@ function game_back()
             toggle_none('games_box');
             break;
     }
+    reset_data();
 }
 
 function game_again()
