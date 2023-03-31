@@ -11,10 +11,14 @@
 // 1. Scriviamo sempre in italiano i passaggi che vogliamo fare
 // 2. Scriviamo sempre solo un pezzetto di codice alla volta, se funziona allora andiamo avanti.
 
+// Costanti e variabili globali
+// Costanti usate per comandare la disabilitazione/abilitazione dei pulsanti e degli input
 const       disable_btn     = true;
 const       enable_btn      = false;
+// Variabile che "registra" il gioco corrente/ultimo gioco a cui si è giocato
 let         last_game       = 0; 
 
+// Funzione che resetta gli attributi degli input. Utilizzata nelle fasi di ripetizione gioco e ritorno alla barra dei pulsanti
 function reset_data()
 {
     document.getElementById('your_word').value = "Osso";
@@ -23,6 +27,7 @@ function reset_data()
     document.getElementById('user_nr').value = "1";
 }
 
+// Funzione che inverte lo stato di enabled/disabled degli elementi (pulsanti e input) discendenti dell'elemento specificato
 function toggle_on_off(where, btn_status)
 {
     let     elements    = document.querySelectorAll(where + ' .toggle_btn');
@@ -32,24 +37,28 @@ function toggle_on_off(where, btn_status)
     }
 }
 
+// Funzione che esegue lo switch del display "none" dell'id specificato
 function toggle_none(id_what)
 {
     let element = document.getElementById(id_what);
     element.classList.toggle('d-none');
 }
 
+// Funzione che avvia il gioco della palindroma
 function play_palindrome()
 {
     document.getElementById('even_odd_title').innerText = "PALINDROMA";
     toggle_none('palindrome_game');
 }
 
+// Funzione che avvia il gioco del pari o dispari
 function play_even_odd()
 {
     document.getElementById('even_odd_title').innerText = "PARI o DISPARI";
     toggle_none('even_odd_game');
 }
 
+// Funzione che viene evocata in prima istanza dai pulsanti della barra di navigazione e rievocata all'atto del "gioca di nuovo". Setta la variabile "last_game" e prepara il gioco, chiamando la funzione specifica
 function go_to_game(game)
 {
     last_game = game;
@@ -66,6 +75,7 @@ function go_to_game(game)
     }
 }
 
+// Funzione booleana che restituisce true o false, a seconda che il parametro sia pari o dispari
 function is_even(number)
 {
     if (number % 2 == 0)
@@ -78,6 +88,7 @@ function is_even(number)
     }
 }
 
+// Funzione booleana che restituisce true o false, a seconda che la parola passata come parametro sia palindroma o meno.
 function is_palindrome(word)
 {
     const   word_length     = word.length;
@@ -85,6 +96,7 @@ function is_palindrome(word)
     for (let i=0; i <= last_char; i++)
     {
         if (!(word[i] == word[word_length - 1 - i]))
+        // Per stabilire se la parola è palindroma si confrontano, a coppie, i caratteri simmetrici rispetto all'asse centrale della funzione
         {
             return false;
         }
@@ -92,45 +104,46 @@ function is_palindrome(word)
     return true;
 }
 
+// Generatore randomico di numeri interi
 function random_int(max)
 {
     return Math.floor(Math.random() * max);
 }
 
+// Funzione che ristabilisce le condizioni iniziali del display none e di abilitazione dei vari elementi e ritorna alla barra dei pulsanti
 function game_back()
 {
+    toggle_none('game_buttons');
+    toggle_none('game_result');
+    toggle_on_off('#btn_nav', enable_btn);   
+    toggle_none('games_box');
     switch (last_game)
     {
         case 1:
-            toggle_none('game_buttons');
             toggle_none('palindrome_result');
             toggle_none('palindrome_result_msg');
-            toggle_none('game_result');
             toggle_on_off('#palindrome_game', enable_btn);
             toggle_none('palindrome_game');
-            toggle_on_off('#btn_nav', enable_btn);   
-            toggle_none('games_box');
             break;
         case 2:
-            toggle_none('game_buttons');
             toggle_none('even_odd_result');
             toggle_none('even_odd_result_msg');
-            toggle_none('game_result');
             toggle_on_off('#even_odd_game', enable_btn);
             toggle_none('even_odd_game');
-            toggle_on_off('#btn_nav', enable_btn);   
-            toggle_none('games_box');
+
             break;
     }
     reset_data();
 }
 
+// Funzione che resetta le condizioni iniziali e riesegue l'ultimo gioco
 function game_again()
 {
     game_back();
     go_to_game(last_game);
 }
 
+// Funzione di call back che gestisce la parte logica e di output del gioco del pari o dispari
 even_odd_game.addEventListener("submit", (even_odd_call_back) => 
 {
     even_odd_call_back.preventDefault();
@@ -157,6 +170,7 @@ even_odd_game.addEventListener("submit", (even_odd_call_back) =>
     toggle_none('game_buttons');
 });
 
+// Funzione di call back che gestisce la parte logica e di output del gioco della palindroma
 palindrome_game.addEventListener("submit", (palindrome_call_back) => 
 {
     palindrome_call_back.preventDefault();
