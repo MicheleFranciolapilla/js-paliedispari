@@ -74,7 +74,6 @@ function is_palindrome(word)
 {
     const   word_length     = word.length;
     const   last_char       = Math.floor(word_length / 2) - 1;
-    console.log(word, word_length, last_char);
     for (let i=0; i <= last_char; i++)
     {
         if (!(word[i] == word[word_length - 1 - i]))
@@ -90,24 +89,37 @@ function random_int(max)
     return Math.floor(Math.random() * max);
 }
 
-function game_again()
+function game_back()
 {
     switch (last_game)
     {
+        case 1:
+            toggle_none('game_buttons');
+            toggle_none('palindrome_result');
+            toggle_none('palindrome_result_msg');
+            toggle_none('game_result');
+            toggle_on_off('#palindrome_game', enable_btn);
+            toggle_none('palindrome_game');
+            toggle_on_off('#btn_nav', enable_btn);   
+            toggle_none('games_box');
+            break;
         case 2:
             toggle_none('game_buttons');
             toggle_none('even_odd_result');
             toggle_none('even_odd_result_msg');
             toggle_none('game_result');
             toggle_on_off('#even_odd_game', enable_btn);
+            toggle_none('even_odd_game');
+            toggle_on_off('#btn_nav', enable_btn);   
+            toggle_none('games_box');
+            break;
     }
 }
 
-function game_back()
+function game_again()
 {
-    game_again();
-    toggle_none('games_box');
-    toggle_on_off('#btn_nav', enable_btn);   
+    game_back();
+    go_to_game(last_game);
 }
 
 even_odd_game.addEventListener("submit", (even_odd_call_back) => 
@@ -134,8 +146,6 @@ even_odd_game.addEventListener("submit", (even_odd_call_back) =>
     toggle_none('even_odd_result');
     toggle_none('even_odd_result_msg');
     toggle_none('game_buttons');
-    console.log(even, odd, number);
-    console.log(cpu_nr, result, even_odd, you_win);
 });
 
 palindrome_game.addEventListener("submit", (palindrome_call_back) => 
