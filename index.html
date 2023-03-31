@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Link a Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- LInk a Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>PaliDispari</title>
+</head>
+<body>
+    <header>
+        <h1 class="text-center">PaliDispari</h1>
+        <nav class="container-fluid">
+            <div class="row bg-success py-2 justify-content-start border border-3 border-info">
+                <div class="col-2 offset-1">
+                    <button id="palindrome_button" type="button" class="btn btn-primary border border-2 border-white rounded-3" onclick="go_to_palindrome()">Palindroma ?</button>
+                </div>
+                <div class="col-2">
+                    <button id="even_odd_button" type="button" class="btn btn-secondary border border-2 border-white rounded-3" onclick="go_to_even_odd()">Pari / Dispari ?</button>
+                </div>
+                <div class="col-1 offset-5">
+                    <button id="quit_button" type="button" class="btn btn-light border border-2 border-warning rounded-3" onclick="window.close()">Abbandona</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+    </main>
+    
+    <!-- Script per Bootstrap 5 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- File di script dedicato -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
